@@ -25,5 +25,5 @@ navbar:
       href: https://github.com/deconbench       # CHANGE HERE 
 output:
   html_document:
-    theme: cosmo
+    theme: readable
     highlight: textmate
