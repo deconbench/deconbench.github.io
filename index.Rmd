@@ -1,9 +1,9 @@
 ---
-title: "Welcome to the DECONbench website!"
+title: "A benchmarking platform"
 output:
   html_document:
     includes:
       in_header: cover.html
 ---
 
-You're up and running!
+DECONbench, is a standardized unbiased benchmarking resource, applied to the evaluation of computational methods quantifying cell-type heterogeneity in cancer. it includes gold standard multi-omic simulated benchmark datasets (transcriptome and methylation data) and a set of baseline deconvolution methods (reference-free algorithms inferring cell-type proportions). DECONbench performs a systematic performance evaluation of each new methodological contribution and provides the possibility to publically share source code and scoring. It allows continuous submission of new methods in a user-friendly fashion, each novel contribution being automatically compared to the reference baseline algorithms, which enables crowdsourcing benchmarking. DECONbench is hosted on the open source Codalab competition platform. It is freely available at: XXX

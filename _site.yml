@@ -1,29 +1,36 @@
 name: "DECONbench"                                # CHANGE HERE 
 output_dir: "."
 navbar:
-  title: "DECONbench"                             # CHANGE HERE 
+  title: ""                             # CHANGE HERE
   type: inverse
   left:
     - text: "Home"
       icon: fa-home
       href: index.html
-    - text: "About"
-      icon: fa-user 
+    - text: "Tutorial"
+      icon: fas fa-book-open
       href: about.html
-    - text: "CV"
-      icon: fa-file-pdf-o
+    - text: "Baseline methods"
+      icon: fas fa-pencil-ruler
       href: cv.html
-    - text: "Blog"
-      icon: fa-rss
-      href: https://deconbench.github.io/blog/  # CHANGE HERE OR DELETE ALL 3 LINES 
+    - text: "Benchmark datasets"
+      icon: fas fa-database
+      href: cv.html
+    - text: "Resources"
+      icon: fas fa-copy
+      href: cv.html
   right:
-    - text: "Contact me"
+    - text: "Contact us"
       icon: fa-envelope-o
-      href: mailto:magali.richard@univ-grenoble-alpes.fr, yuna.blum@univ-rennes1.fr                    # CHANGE HERE 
+      href: mailto:magali.richard@univ-grenoble-alpes.fr, yuna.blum@univ-rennes1.fr                    # CHANGE HERE
     - text: "GitHub"
       icon: fa-github
-      href: https://github.com/deconbench       # CHANGE HERE 
+      href: https://github.com/deconbench       # CHANGE HERE
+navbar-col: "#386F77"
+navbar-text-col: "#404040"
+navbar-border-col: "#DDDDDD"
+page-col: "#FFFFFF"
 output:
   html_document:
-    theme: readable
+    theme: cerulean
     highlight: textmate
