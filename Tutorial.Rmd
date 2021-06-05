@@ -8,8 +8,13 @@ output:
 
 <br>
 
-##Demo
 
+Deconbench is available on Codalab [here]( https://competitions.codalab.org/competitions/27453?secret_key=b5ae4e78-8e75-44a4-b919-52907529605c). 
+
+![](pictures/codalab.png){width=30%}
+
+##Demo
+This video shows how to use the benchmarking platform:  
 <video width="640" height="480" controls>
   <source src="Demo_with_subtitles.mp4" type="video/mp4">
 </video>
