@@ -7,7 +7,7 @@ output:
 ---
 
 
-This work has been supported by EIT Health in the context of the european project COMETH ([know more](https://cancer-heterogeneity.github.io/cometh.html)) leaded by Magali Richard and Yuna Blum.  
+This work has been supported by EIT Health in the context of the european project COMETH ([know more](https://cancer-heterogeneity.github.io/cometh.html)) leaded by Magali Richard and Yuna Blum and is part of the HADACA data challenges 2nd edition ([know more](https://cancer-heterogeneity.github.io/data_challenge_2019.html)) . 
 ![](pictures/fundings2.png)
 <br>
 <br>

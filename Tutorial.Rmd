@@ -13,10 +13,80 @@ Deconbench is available on Codalab [here]( https://competitions.codalab.org/comp
 
 ![](pictures/codalab.png){width=30%}
 
-##Demo
+##Demo video
 This video shows how to use the benchmarking platform:  
 <video width="640" height="480" controls>
   <source src="Demo_with_subtitles.mp4" type="video/mp4">
 </video>
 
 <br>
+
+
+
+##Step 1: go on Deconbench  
+
+You can directly access the platform from [this link]( https://competitions.codalab.org/competitions/27453?secret_key=b5ae4e78-8e75-44a4-b919-52907529605c).  
+Or you can search the platform from Codalab:
+![](tuto/Slide01.png){width=70%}
+
+![](tuto/Slide02.png){width=70%}
+
+![](tuto/Slide03.png){width=70%}
+
+<br>
+
+##Step 2: Participate by adding a novel method  
+
+First you need to create an account:
+
+![](tuto/Slide05.png){width=70%}
+
+![](tuto/Slide06.png){width=70%}
+
+![](tuto/Slide07.png){width=70%}
+<br>
+
+Then, you will be able to download the necessary files:   **stating_kit.zip** and **data_public.zip** that are in the Participate tab>Files item.  
+
+On your local machine, unzip the two zip files stating_kit.zip and data_public.zip. Copy the data sets (D_met1_public.rds, D_rna1_public.rds, A_1_public.rds) into the unziped starting_kit directory.  
+Then open R from the starting_kit directory, (e.g. open strating_kit.Rmd with RStudio).
+
+The unziped strating-kit directory contains now:  
+- A **starting_kit.html** corresponding to the vignette of the Benchmark (all useful information can be found here).  
+- A **submission_script.Rmd** to modify and to use to submit your code.  
+- The methylation and transcriptome D matrices, and the associated A matrix. 
+
+In the R console launch the following command:  
+```
+rmarkdown::render(input = "submission_script.Rmd")
+```
+**This command line will create the zip file you need to submit your method on Deconbench!**  
+You are alsmost there!😄
+
+
+![](tuto/Slide08.png){width=70%}
+
+![](tuto/Slide09.png){width=70%}
+
+![](tuto/Slide10.png){width=70%}
+
+![](tuto/Slide11.png){width=70%}
+
+![](tuto/Slide12.png){width=70%}
+
+![](tuto/Slide13.png){width=70%}
+
+![](tuto/Slide14.png){width=70%}
+
+<br>
+
+##Step 3: View the results and performance of your method  
+
+![](tuto/Slide15.png){width=70%}
+![](tuto/Slide16.png){width=70%}
+![](tuto/Slide17.png){width=70%}
+![](tuto/Slide18.png){width=70%}
+![](tuto/Slide19.png){width=70%}
+
+<font size="4"> 🏆 Is you method the best? </font> 
+

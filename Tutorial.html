@@ -353,11 +353,83 @@ $(document).ready(function () {
 <img src="pictures/codalab.png" style="width:30.0%" />
 
 </div>
-<div id="demo" class="section level2">
-<h2>Demo</h2>
+<div id="demo-video" class="section level2">
+<h2>Demo video</h2>
 <p>This video shows how to use the benchmarking platform:<br />
 <video width="640" height="480" controls> <source src="Demo_with_subtitles.mp4" type="video/mp4"> </video></p>
 <p><br></p>
+</div>
+<div id="step-1-go-on-deconbench" class="section level2">
+<h2>Step 1: go on Deconbench</h2>
+<p>You can directly access the platform from <a href="https://competitions.codalab.org/competitions/27453?secret_key=b5ae4e78-8e75-44a4-b919-52907529605c">this link</a>.<br />
+Or you can search the platform from Codalab: <img src="tuto/Slide01.png" style="width:70.0%" /></p>
+<div class="figure">
+<img src="tuto/Slide02.png" style="width:70.0%" />
+
+</div>
+<div class="figure">
+<img src="tuto/Slide03.png" style="width:70.0%" />
+
+</div>
+<p><br></p>
+</div>
+<div id="step-2-participate-by-adding-a-novel-method" class="section level2">
+<h2>Step 2: Participate by adding a novel method</h2>
+<p>First you need to create an account:</p>
+<div class="figure">
+<img src="tuto/Slide05.png" style="width:70.0%" />
+
+</div>
+<div class="figure">
+<img src="tuto/Slide06.png" style="width:70.0%" />
+
+</div>
+<p><img src="tuto/Slide07.png" style="width:70.0%" /> <br></p>
+<p>Then, you will be able to download the necessary files: <strong>stating_kit.zip</strong> and <strong>data_public.zip</strong> that are in the Participate tab&gt;Files item.</p>
+<p>On your local machine, unzip the two zip files stating_kit.zip and data_public.zip. Copy the data sets (D_met1_public.rds, D_rna1_public.rds, A_1_public.rds) into the unziped starting_kit directory.<br />
+Then open R from the starting_kit directory, (e.g. open strating_kit.Rmd with RStudio).</p>
+<p>The unziped strating-kit directory contains now:<br />
+- A <strong>starting_kit.html</strong> corresponding to the vignette of the Benchmark (all useful information can be found here).<br />
+- A <strong>submission_script.Rmd</strong> to modify and to use to submit your code.<br />
+- The methylation and transcriptome D matrices, and the associated A matrix.</p>
+<p>In the R console launch the following command:</p>
+<pre><code>rmarkdown::render(input = &quot;submission_script.Rmd&quot;)</code></pre>
+<p><strong>This command line will create the zip file you need to submit your method on Deconbench!</strong><br />
+You are alsmost there!😄</p>
+<div class="figure">
+<img src="tuto/Slide08.png" style="width:70.0%" />
+
+</div>
+<div class="figure">
+<img src="tuto/Slide09.png" style="width:70.0%" />
+
+</div>
+<div class="figure">
+<img src="tuto/Slide10.png" style="width:70.0%" />
+
+</div>
+<div class="figure">
+<img src="tuto/Slide11.png" style="width:70.0%" />
+
+</div>
+<div class="figure">
+<img src="tuto/Slide12.png" style="width:70.0%" />
+
+</div>
+<div class="figure">
+<img src="tuto/Slide13.png" style="width:70.0%" />
+
+</div>
+<div class="figure">
+<img src="tuto/Slide14.png" style="width:70.0%" />
+
+</div>
+<p><br></p>
+</div>
+<div id="step-3-view-the-results-and-performance-of-your-method" class="section level2">
+<h2>Step 3: View the results and performance of your method</h2>
+<p><img src="tuto/Slide15.png" style="width:70.0%" /> <img src="tuto/Slide16.png" style="width:70.0%" /> <img src="tuto/Slide17.png" style="width:70.0%" /> <img src="tuto/Slide18.png" style="width:70.0%" /> <img src="tuto/Slide19.png" style="width:70.0%" /></p>
+<p><font size="4"> 🏆 Is you method the best? </font></p>
 </div>
 
 
