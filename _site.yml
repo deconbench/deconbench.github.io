@@ -22,7 +22,7 @@ navbar:
   right:
     - text: "Contributors"
       icon: fas fa-users
-      href: cv.html
+      href: Contributors.html
     - text: "Contact us"
       icon: fa-envelope-o
       href: mailto:magali.richard@univ-grenoble-alpes.fr, yuna.blum@univ-rennes1.fr                    # CHANGE HERE
