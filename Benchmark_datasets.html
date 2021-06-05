@@ -11,7 +11,7 @@
 
 
 
-<title>Step-by-step turorial</title>
+<title>Overview of the benchmark datasets</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -297,7 +297,7 @@ $(document).ready(function () {
   </a>
 </li>
 <li>
-  <a href="cv.html">
+  <a href="Benchmark_datasets.html">
     <span class="fas fa fas fa-database"></span>
      
     Benchmark datasets
@@ -342,23 +342,23 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Step-by-step turorial</h1>
+<h1 class="title toc-ignore">Overview of the benchmark datasets</h1>
 
 </div>
 
 
-<p><br></p>
-<p>Deconbench is available on Codalab <a href="https://competitions.codalab.org/competitions/27453?secret_key=b5ae4e78-8e75-44a4-b919-52907529605c">here</a>.</p>
 <div class="figure">
-<img src="pictures/codalab.png" style="width:30.0%" />
+<img src="pictures/supp_fig1.png" />
 
 </div>
-<div id="demo" class="section level2">
-<h2>Demo</h2>
-<p>This video shows how to use the benchmarking platform:<br />
-<video width="640" height="480" controls> <source src="Demo_with_subtitles.mp4" type="video/mp4"> </video></p>
-<p><br></p>
-</div>
+<ol style="list-style-type: lower-alpha">
+<li>5 different cell populations present in pancreatic tumors were considered.</li>
+<li>Raw transcriptome and methylome profiles of these different cell populations were extracted from various sources (PDX model, tissues or isolated cells).</li>
+<li>Raw cell type profile matrices were preprocessed (Feature filtering, normalization, signal transformation, sample aggregation) to avoid any batch effect.</li>
+<li>In silico Dirichlet distribution have been used based on realistic proportions defined by the anatomopathologist expertise (J. Cros).</li>
+<li>Paired methylome and transcriptome of in silico mixtures from pancreatic tumors were obtained by considering D = T A, with T the cell-type profiles (matrix of size M * K, with M the number of features and K=5 the number of cell types) and A the cell-type proportion per patient (matrix of size K * N, with N=30 the number of samples) common between both omics.</li>
+</ol>
+<p>More details in our <a href="https://www.biorxiv.org/content/10.1101/2020.06.06.131482v1">article</a></p>
 
 
 

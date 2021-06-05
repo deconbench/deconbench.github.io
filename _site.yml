@@ -15,7 +15,7 @@ navbar:
       href: cv.html
     - text: "Benchmark datasets"
       icon: fas fa-database
-      href: cv.html
+      href: Benchmark_datasets.html
     - text: "Resources"
       icon: fas fa-copy
       href: cv.html
