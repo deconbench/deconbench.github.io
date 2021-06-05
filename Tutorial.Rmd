@@ -1,5 +1,5 @@
 ---
-title: "Step-by-step turorial"
+title: "Step-by-step tutorial"
 output:
   html_document:
     includes:
