@@ -12,7 +12,7 @@ navbar:
       href: Tutorial.html
     - text: "Baseline methods"
       icon: fas fa-cogs
-      href: cv.html
+      href: Baseline_methods.html
     - text: "Benchmark datasets"
       icon: fas fa-database
       href: Benchmark_datasets.html
