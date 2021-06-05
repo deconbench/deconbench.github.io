@@ -1,7 +1,15 @@
 ---
-title: "DECONbench"
+title: "Resources"
+output:
+  html_document:
+    includes:
+      in_header: cover.html
 ---
 
-## THIS is a test
+##R environment and Docker image
 
-Say more about you here.
+DECONbench is designed to execute methods developed in R environment, using a docker image provided [here](https://hub.docker.com/r/a2alexis/codalab2019). 
+
+A list of R packages installed on the docker image is provided [here]( https://gricad-gitlab.univ-grenoble-alpes.fr/codalab/docker-recipes/tree/master/Hadaca_2019) (more can be installed upon request).
+
+<br>
