@@ -9,7 +9,7 @@ navbar:
       href: index.html
     - text: "Tutorial"
       icon: fas fa-book-open
-      href: about.html
+      href: Tutorial.html
     - text: "Baseline methods"
       icon: fas fa-cogs
       href: cv.html
