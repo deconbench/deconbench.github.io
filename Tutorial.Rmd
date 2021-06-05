@@ -8,8 +8,8 @@ output:
 
 <br>
 
+Our platform is hosted on a Linux operating system supporting standard singularities or containers. The benchmark is structured around an ingestion program used as a wrapper object to execute an R program. Should anyone wish to benchmark a method coded in another language, R could then be used as script language to execute the given program by invoking a System Command. Required additional languages or libraries can be installed on our Docker image upon request ([resources webpage](https://deconbench.github.io/Resource.html)).  
 
-Deconbench is available on Codalab [here]( https://competitions.codalab.org/competitions/27453?secret_key=b5ae4e78-8e75-44a4-b919-52907529605c). 
 
 ![](pictures/codalab.png){width=30%}
 
