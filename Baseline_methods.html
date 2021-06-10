@@ -19,6 +19,15 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -27,12 +36,16 @@
 
 <div><img src="pictures/cover.png" width="70%" align="center"></div>
 
-<style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -45,32 +58,7 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 
 
@@ -80,10 +68,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -100,40 +84,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -161,7 +118,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -173,7 +130,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -184,10 +141,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -199,7 +169,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -277,35 +246,35 @@ $(document).ready(function () {
       <ul class="nav navbar-nav">
         <li>
   <a href="index.html">
-    <span class="fa fa-home"></span>
+    <span class="fas fa-home"></span>
      
     Home
   </a>
 </li>
 <li>
   <a href="Tutorial.html">
-    <span class="fas fa fas fa-book-open"></span>
+    <span class="fas fa-book-open"></span>
      
     Tutorial
   </a>
 </li>
 <li>
   <a href="Baseline_methods.html">
-    <span class="fas fa fas fa-cogs"></span>
+    <span class="fas fa-cogs"></span>
      
     Baseline methods
   </a>
 </li>
 <li>
   <a href="Benchmark_datasets.html">
-    <span class="fas fa fas fa-database"></span>
+    <span class="fas fa-database"></span>
      
     Benchmark datasets
   </a>
 </li>
 <li>
   <a href="Resource.html">
-    <span class="fas fa fas fa-copy"></span>
+    <span class="fas fa-copy"></span>
      
     Resources
   </a>
@@ -314,21 +283,21 @@ $(document).ready(function () {
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="Contributors.html">
-    <span class="fas fa fas fa-users"></span>
+    <span class="fas fa-users"></span>
      
     Contributors
   </a>
 </li>
 <li>
   <a href="mailto:magali.richard@univ-grenoble-alpes.fr, yuna.blum@univ-rennes1.fr">
-    <span class="fa fa-envelope-o"></span>
+    <span class="fas fa-envelope-o"></span>
      
     Contact us
   </a>
 </li>
 <li>
   <a href="https://github.com/deconbench">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
     GitHub
   </a>
@@ -338,7 +307,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -346,24 +315,61 @@ $(document).ready(function () {
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#general-description">General description</a></li>
+<li><a href="#summary-table">Summary table</a></li>
+<li><a href="#detail-of-each-baseline-method">Detail of each baseline method</a><ul>
+<li><a href="#ica-based-methods">ICA-based methods</a><ul>
+<li><a href="#rna_wica-r_wic-ica-based-deconvolution-on-rna">RNA_wICA (r_WIC, ICA-based deconvolution on RNA)</a></li>
+<li><a href="#dnam_wica-r_wic-ica-based-deconvolution-on-rna">DNAm_wICA (r_WIC, ICA-based deconvolution on RNA)</a></li>
+<li><a href="#both_wica-b_wic.-ica-based-deconvolution-on-rnad-and-dnam">both_wICA (b_WIC. ICA-based deconvolution on RNAD and DNAm)</a></li>
+</ul></li>
+<li><a href="#nmf-based-methods">NMF-based methods</a><ul>
+<li><a href="#rna_wnmf-r_wnm-nmf-based-deconvolution-on-rna">RNA_wNMF (r_WNM, NMF-based deconvolution on RNA)</a></li>
+<li><a href="#dnam_edec-m_edc-nmf-based-deconvolution-on-dnam">DNAm_EDec (m_EDC, NMF-based deconvolution on DNAm)</a></li>
+<li><a href="#dnam_medecom-m_mdc-nmf-based-deconvolution-on-dnam">DNAm_MeDeCom (m_MDC, NMF-based deconvolution on DNAm)</a></li>
+<li><a href="#both_wnmfmedecom-b_com-nmf-based-deconvolution-on-rna-and-dnam">both_wNMFMeDeCom (b_COM, NMF-based deconvolution on RNA and DNAm)</a></li>
+<li><a href="#both_meanwnmfmedecom-b_mea-nmf-based-deconvolution-on-rna-and-dnam">both_meanwNMFMeDeCom (b_MEA, NMF-based deconvolution on RNA and DNAm)</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
 
-<p>This table gives an overview of all the methods implemented as baseline is Deconbench, in particular their characteristics in terms of:<br />
+<div id="general-description" class="section level1">
+<h1>General description</h1>
+<p>The baseline methods we propose here are wrappers of already published unsupervised deconvolution algorithms (ICA-based or NMF-based). We assume here that <span class="math inline">\(A\)</span>, <span class="math inline">\(T_{MET}\)</span> and <span class="math inline">\(T_{RNA}\)</span> are unknown and need to be estimated, either independently (single-omic pipelines) or integratively (double-omic pipelines).</p>
+<p>Before deconvolution, we systematically apply a pre-treatment step of dimensionality reduction based on feature selection. All baseline methods source code is downloadable on the DECONbench platform.</p>
+<p>All baselines relies on unsupervised deconvolution algorithms, which consists in solving D=TA, either by ICA-based (i) or NMF-based (ii) approaches.</p>
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>ICA-based approaches (r_WIC, m_WIC and b_WIC) consist of minimising mutual information of sources by defining independent components. It is based on the fixed-point FastICA algorithm developed by Aapo Hyvärinen [1,2].</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>NMF-based approaches (r_WNM, m_EDC, m_MDC, b_COM, b_MEA) aims to minimising <span class="math inline">\(||D-TA||_{2}\)</span>.</li>
+</ol></li>
+</ul>
+</div>
+<div id="summary-table" class="section level1">
+<h1>Summary table</h1>
+<p>This following table gives an overview of all the methods implemented as baseline is Deconbench, in particular their characteristics in terms of:<br />
 - omics data they work on<br />
 - the feature selection they use (FS)<br />
 - the deconvolution algorithm they are based on<br />
 - their computational time.<br />
 A more detailed description of each method is given below the table.</p>
-<table style="width:100%;">
+<table>
 <colgroup>
-<col width="4%" />
+<col width="7%" />
+<col width="20%" />
+<col width="11%" />
+<col width="6%" />
+<col width="6%" />
+<col width="11%" />
+<col width="11%" />
 <col width="17%" />
-<col width="18%" />
-<col width="2%" />
-<col width="3%" />
-<col width="8%" />
-<col width="8%" />
-<col width="18%" />
-<col width="18%" />
+<col width="6%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -394,23 +400,23 @@ A more detailed description of each method is given below the table.</p>
 <td align="left"><strong>FS DNAm</strong></td>
 <td align="center">/</td>
 <td align="center">/</td>
-<td align="center">Var &gt; 0.02</td>
-<td align="center">Var &gt; 0.02</td>
+<td align="center">5K most variable probes</td>
+<td align="center">5K most variable probes</td>
 <td align="center">/</td>
 <td align="center">/</td>
-<td align="center">Var &gt; 0.02</td>
-<td align="center">Var &gt; 0.02</td>
+<td align="center">5K most variable probes</td>
+<td align="center">5K most variable probes</td>
 </tr>
 <tr class="odd">
 <td align="left"><strong>FS RNA</strong></td>
-<td align="center">ICA, most important genes of most stable components, removing of duplicated genes</td>
-<td align="center">ICA, most important genes of most stable components, not removing of duplicated genes</td>
+<td align="center">ICA - selection of top-contributing genes and filtering of duplicated genes</td>
+<td align="center">ICA - selection of top-contributing genes</td>
 <td align="center">/</td>
 <td align="center">/</td>
 <td align="center">/</td>
-<td align="center">/</td>
-<td align="center">ICA, most important genes of most stable components, not removing of duplicated genes</td>
-<td align="center">ICA, most important genes of most stable components, not removing of duplicated genes</td>
+<td align="center">ICA - selection of top-contributing genes</td>
+<td align="center">ICA - selection of top-contributing genes</td>
+<td align="center"></td>
 </tr>
 <tr class="even">
 <td align="left"><strong>Deconvolution DNAm</strong></td>
@@ -436,45 +442,124 @@ A more detailed description of each method is given below the table.</p>
 </tr>
 <tr class="even">
 <td align="left"><strong>Time 10 A</strong></td>
-<td align="center">~10mn</td>
-<td align="center">~20mn</td>
+<td align="center">~10min</td>
+<td align="center">~20min</td>
 <td align="center">~3h</td>
 <td align="center">~17h</td>
-<td align="center">~10mn</td>
-<td align="center">~10mn</td>
+<td align="center">~10min</td>
+<td align="center">~10min</td>
 <td align="center">~17h</td>
 <td align="center">~17h30</td>
 </tr>
 <tr class="odd">
 <td align="left"><strong>Time 1 A</strong></td>
-<td align="center">~1mn</td>
-<td align="center">~2mn</td>
-<td align="center">~20mn</td>
+<td align="center">~1min</td>
+<td align="center">~2min</td>
+<td align="center">~20min</td>
 <td align="center">~1h40</td>
-<td align="center">~1mn</td>
-<td align="center">~1mn</td>
+<td align="center">~1min</td>
+<td align="center">~1min</td>
 <td align="center">~1h40</td>
 <td align="center">~1h45</td>
+</tr>
+<tr class="even">
+<td align="left"><strong>Reference of the tool</strong></td>
+<td align="center">ref [1-3]</td>
+<td align="center">ref [4]</td>
+<td align="center">ref [5]</td>
+<td align="center">ref [6]</td>
+<td align="center">ref [1-3]</td>
+<td align="center">ref [1-3]</td>
+<td align="center">ref [4][6]</td>
+<td align="center">ref [4][6]</td>
 </tr>
 </tbody>
 </table>
 <p><code>Time 1 A</code> is the time to run the method one time, <code>Time 10 A</code> is the time to run the method on all the benchmark datasets of DeconBench.</p>
-<div id="detail-of-each-baseline-method" class="section level2">
-<h2>Detail of each baseline method</h2>
+</div>
+<div id="detail-of-each-baseline-method" class="section level1">
+<h1>Detail of each baseline method</h1>
 <p>Eight methods have been included in the benchmark as baseline to be compared with the accuracy of new methods.</p>
+<div id="ica-based-methods" class="section level2">
+<h2>ICA-based methods</h2>
+<div id="rna_wica-r_wic-ica-based-deconvolution-on-rna" class="section level3">
+<h3>RNA_wICA (r_WIC, ICA-based deconvolution on RNA)</h3>
+<p>The method RNA_wICA (r_WIC) uses transcriptomic data as input and is based on the ICA algorithm for both feature selection and deconvolution. It relies on the use of the functions “runICA” and “getGenesICA” developed by P. Nazarov (sablab.net/scripts/LibICA.r) and the deconica R package [3].</p>
 <ul>
-<li><p>The method <strong>RNA_wICA (r_WIC)</strong> relies on transcriptomic data and uses Independent Component Analysis (ICA) for both feature selection and deconvolution. It relies on the use of the functions “runICA” and “getGenesICA” by P. Nazarov <a href="sablab.net/scripts/LibICA.r">(available here)</a> and the deconica R package <a href="https://urszulaczerwinska.github.io/DeconICA/">(available here)</a>. For the ICA-based feature selection, the function “runICA” is run for the first time with the parameters ncomp = 10 and ntry = 50. Then, the function “getGenesICA” selects top-contributing genes with a FDR of 0.2, the feature selection is done on these contributing genes belonging to a component having an average stability greater than 0.8. Finally, duplicated genes are removed. For the ICA-based deconvolution step, the function deconica::run_fastica is run with parameters overdecompose = FALSE and n.comp = 5, remaining parameters set to default. The 30 most important genes of each ICA components are extracted by the function deconica::generate_markers with the parameter return = &quot;gene.ranked&quot;. These genes are used to weight the components score with the function deconica::get_scores, with the log counts of the ICA as “df” parameter, the list of 30 genes as “markers.list” parameter, and the parameter summary = &quot;weighted.mean&quot;. Finally, the proportions are extracted with the function deconica::stacked_proportions_plot on the transpose.</p></li>
-<li><p>The method <strong>RNA_wNMF (r_WNM)</strong>, using transcriptomic data, is in two steps. The first step uses ICA to perform a feature selection as described for RNA_wICA, although duplicated genes are kept. This step, therefore, allows a gene which contributes to several components to be present several times in the data. The deconvolution is based on Non-negative Matrix Factorization (NMF) called by the NMF::nmf function <a href="https://CRAN.R-project.org/package=NMF">(package available here)</a>, with the parameter method = &quot;snmf/r&quot;.</p></li>
-<li><p>The method <strong>DNAm_wICA (m_WIC)</strong> analyzes DNA methylation data. It does not provide feature selection. The deconvolution step is based on ICA, similarly to what was described for the second step of RNA_wICA, but applied on the DNA methylation matrix.</p></li>
-<li><p>The method <strong>DNAm_EDec (m_EDC)</strong>, which estimates sample composition from DNA methylation data, follows the pipeline implemented in the R package medepir [1]. The feature selection is made with medepir::feature_selection to keep the probes with a variance higher than 0.02. The method EDec [2] is used for the deconvolution part, with the function medepir::Edec and all the selected probes as “infloci” parameter.</p></li>
-<li><p>The method <strong>DNAm_MeDeCom (m_MDC)</strong>, also using DNA methylation, is similarly based on the pipeline of the R package medepir. The feature selection is made as for DNAm_EDec above, on the probes with a variance higher than 0.02. The deconvolution step, however, is from the MeDeCom R package [3]. It is run with the function MeDeCom::runMeDeCom, with the lambda parameter set to 0.01.</p></li>
-<li><p>The method <strong>both_wICA (b_WIC)</strong> combines the input of both transcriptomics and DNA methylation. It has no feature selection step. The deconvolution is in two steps, one on each data type. The transcriptomics and DNA methylation are separately deconvoluted with the same deconvolution step as in r_WIC and m_WIC respectively. Finally, the mean of both deconvolution matrices is computed as the final method output. To compute the average, the cell types of the both deconvolution matrices are matched by iteration. The cell types of the methylation result matrix are reordered 1,000 times, and the one that best correlates with the transcriptomic result matrix is kept.</p></li>
-<li><p>The method <strong>both_wNMFMeDeCom (b_COM)</strong>, also combining transcriptomics and DNA methylation, is the combination of the two methods RNA_wNMF and DNAm_MeDeCom. The method r_WNM is first applied on the RNAseq matrix. The DNA methylation matrix is pre-treated as described in the m_MDC method, with the selection of probes with a variance higher than 0.02. Finally, the method MeDeCom is run on the DNAm data, with the result of r_WNM as initialization parameter startA.</p></li>
-<li><p>The method <strong>both_meanwNMFMeDeCom (b_MEA)</strong>, which integrates transcriptomics and DNA methylation, applies r_WNM to the transcriptomics matrix, m_MDC to the DNA methylation matrix, and returns the mean of the two results matrices, similarly to what we explained for b_WIC.</p></li>
+<li><p>STEP1: feature selection. For the ICA-based feature selection, the function “runICA” is run at first with the parameters <code>$</code>ncomp = 10<code>$</code> and <code>ntry = 50</code>. Then, the function “getGenesICA” selects top-contributing genes with a FDR of 0.2, the feature selection is done on these contributing genes belonging to a component having an average stability greater than 0.8. Finally, duplicated genes are removed.</p></li>
+<li><p>STEP2: deconvolution. First, we perform FastICA unsupervised deconvolution (<code>deconica::run_fastica</code> is run with the parameters <code>overdecompose = FALSE</code> and <code>n.comp = 5</code>; remaining parameters are set to default). Second, we compute the abundance of the identified cell type following deconica pipeline, assuming that the weighted-mean of the <span class="math inline">\(30_{top}\)</span> genes of a component is a unique proxy of each component signal.The 30 most important genes of each ICA component are extracted by the function deconica::generate_markers with the parameter <code>return = &quot;gene.ranked</code>“. These genes are used to weight the component scores with the function deconica::get_scores, with the log counts of the ICA as “df” parameter, the list of 30 genes as “markers.list” parameter, and the parameter summary = “weighted.mean”. Finally, the proportions are extracted with the function <code>deconica::stacked_proportions_plot</code> on the transpose of the <code>deconica::get_scores</code> output.</p></li>
 </ul>
-<p>[1] Decamps, C., Privé, F., Bacher, R. et al. Guidelines for cell-type heterogeneity quantification based on a comparative analysis of reference-free DNA methylation deconvolution software. BMC Bioinformatics. 2020;21, 16.</p>
-<p>[2] Onuchic V, Hartmaier RJ, Boone DN, Samuels ML, Patel RY, White WM, et al. Epigenomic Deconvolution of breast tumors reveals metabolic coupling between constituent cell types. Cell Rep. 2016;17:2075–86.</p>
-<p>[3] Lutsik P, Slawski M, Gasparoni G, Vedeneev N, Hein M, Walter J. MeDeCom: discovery and quantification of latent components of heterogeneous methylomes. Genome Biol. BioMed Central. 2017;18:55.</p>
+</div>
+<div id="dnam_wica-r_wic-ica-based-deconvolution-on-rna" class="section level3">
+<h3>DNAm_wICA (r_WIC, ICA-based deconvolution on RNA)</h3>
+<p>The method DNAm_wICA (m_WIC) uses DNA methylation data as input.</p>
+<ul>
+<li><p>STEP1: feature selection. It has no feature selection step.</p></li>
+<li><p>STEP2: deconvolution. The deconvolution step is based on ICA, similarly to what was described for the second step of RNA_wICA, but applied on the DNA methylation matrix.</p></li>
+</ul>
+</div>
+<div id="both_wica-b_wic.-ica-based-deconvolution-on-rnad-and-dnam" class="section level3">
+<h3>both_wICA (b_WIC. ICA-based deconvolution on RNAD and DNAm)</h3>
+<p>The method both_wICA (b_WIC) combines transcriptomics and DNA methylation information.</p>
+<ul>
+<li><p>STEP1: feature selection. It has no feature selection step.</p></li>
+<li><p>STEP2: deconvolution. The deconvolution is in two steps, one on each data type. The transcriptomics and DNA methylation are separately deconvoluted with the same deconvolution step as in r_WIC and m_WIC respectively to estimate AMET and ARNA</p></li>
+<li><p>STEP3: integration. Finally, the mean of both AMET and ARNA estimated proportion matrices is computed as the final method output. To compute the average, the cell types of the both deconvolution matrices are matched by iteration. The cell types of the methylation result matrix are reordered 1,000 times, and the one that best correlates with the transcriptomic result matrix is kept.</p></li>
+</ul>
+</div>
+</div>
+<div id="nmf-based-methods" class="section level2">
+<h2>NMF-based methods</h2>
+<div id="rna_wnmf-r_wnm-nmf-based-deconvolution-on-rna" class="section level3">
+<h3>RNA_wNMF (r_WNM, NMF-based deconvolution on RNA)</h3>
+<p>The method RNA_wNMF (r_WNM), is a two step-approach that uses transcriptomic data as input.</p>
+<ul>
+<li><p>STEP1: feature selection. The first step uses ICA to perform a feature selection as described for RNA_wICA, although duplicated genes are kept. This step therefore allows genes that contribute to several components to be present several times in the data.</p></li>
+<li><p>STEP2: deconvolution. The deconvolution is based on sparse NMF and least-squares optimization to minimise <span class="math inline">\(||D-TA||_{2}\)</span> [4]. It is called by the <code>NMF::nmf</code> function, with the parameter <code>method = &quot;snmf/r&quot;</code>.</p></li>
+</ul>
+</div>
+<div id="dnam_edec-m_edc-nmf-based-deconvolution-on-dnam" class="section level3">
+<h3>DNAm_EDec (m_EDC, NMF-based deconvolution on DNAm)</h3>
+<ul>
+<li><p>STEP1: feature selection. The method DNAm_EDec (m_EDC), uses DNA methylation data as input and follows the pipeline implemented in the R package medepir7. The feature selection is performed by <code>medepir::feature_selection</code> [7] for keeping highly variable probes (5000 most variable probes).</p></li>
+<li><p>STEP2: deconvolution. The NMF-based algorithm of the method EDec9 is used for the deconvolution part, with the function <code>medepir::Edec</code> [5] and all the selected probes as “infloci” parameter. The algorithm consist in minimizing the error term <span class="math inline">\(||D-TA||_{2}\)</span> with constraints on methylation values.</p></li>
+</ul>
+</div>
+<div id="dnam_medecom-m_mdc-nmf-based-deconvolution-on-dnam" class="section level3">
+<h3>DNAm_MeDeCom (m_MDC, NMF-based deconvolution on DNAm)</h3>
+<ul>
+<li><p>STEP1: feature selection. The method DNAm_MeDeCom (m_MDC), uses DNA methylation data as input and is based on the pipeline of the R package <code>medepir</code> [7]. The feature selection is performed as for DNAm_EDec above to select the 5000 most variable probes.</p></li>
+<li><p>STEP2: deconvolution. The deconvolution step, however, uses the MeDeCom R package8. It is run with the function <code>MeDeCom::runMeDeCom</code> [6], with the lambda parameter set to 0.01. As EDec implementation of NMF algorithm, MeDeCom algorithm consists in minimizing the error term <span class="math inline">\(||D-TA||_{2}\)</span> with constraints on methylation values.</p></li>
+</ul>
+</div>
+<div id="both_wnmfmedecom-b_com-nmf-based-deconvolution-on-rna-and-dnam" class="section level3">
+<h3>both_wNMFMeDeCom (b_COM, NMF-based deconvolution on RNA and DNAm)</h3>
+<p>The method both_wNMFMeDeCom (b_COM) combines transcriptomics and DNA methylation information. It is the combination of the two methods RNA_wNMF and DNAm_MeDeCom. The method r_WNM is first applied on the RNAseq matrix.</p>
+<ul>
+<li><p>STEP1: feature selection. The DNA methylation matrix is pre-treated as described in the m_MDC method, with the selection of 5000 most variable.</p></li>
+<li><p>STEP2-3: deconvolution-integration. Finally, the MeDeCom algorithm is run on the DNAm data, with the result of r_WNM as the initialization parameter startA.</p></li>
+</ul>
+</div>
+<div id="both_meanwnmfmedecom-b_mea-nmf-based-deconvolution-on-rna-and-dnam" class="section level3">
+<h3>both_meanwNMFMeDeCom (b_MEA, NMF-based deconvolution on RNA and DNAm)</h3>
+<p>The method both_meanwNMFMeDeCom (b_MEA), which integrates transcriptomics and DNA methylation, applies r_WNM to the transcriptomics matrix, m_MDC to the DNA methylation matrix.</p>
+<ul>
+<li><p>STEP1: feature selection. Feature selection is performed on DMET and DRNA matrices as described in r_WNM and m_MDC sections.</p></li>
+<li><p>STEP2: deconvolution. Deconvolution is performed on DMET and DRNA matrices as described in r_WNM and m_MDC sections to estimate AMET and ARNA matrices.</p></li>
+<li><p>STEP3: integration. We computed the mean of the two estimated AMET and ARNA matrices, similarly to b_WIC.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<p>[1] fastICA: FastICA Algorithms to Perform ICA and Projection Pursuit. <a href="https://CRAN.R-project.org/package=fastICA" class="uri">https://CRAN.R-project.org/package=fastICA</a>.</p>
+<p>[2] Hyvarinen, A. Fast and robust fixed-point algorithms for independent component analysis. IEEE Trans. Neural Netw. 10, 626–634 (1999).</p>
+<p>[3] Czerwinska, U. UrszulaCzerwinska/DeconICA: DeconICA first release. (Zenodo, 2018). <a href="doi:10.5281/zenodo.1250070" class="uri">doi:10.5281/zenodo.1250070</a>.</p>
+<p>[4] Frichot, E., Mathieu, F., Trouillon, T., Bouchard, G. &amp; François, O. Fast and Efficient Estimation of Individual Ancestry Coefficients. Genetics 196, 973–983 (2014).</p>
+<p>[5] Onuchic, V. et al. Epigenomic Deconvolution of Breast Tumors Reveals Metabolic Coupling between Constituent Cell Types. Cell Rep. 17, 2075–2086 (2016).</p>
+<p>[6] Lutsik, P. et al. MeDeCom: discovery and quantification of latent components of heterogeneous methylomes. Genome Biol. 18, 1–20 (2017).</p>
+<p>[7] Decamps, C., Privé, F., Bacher, R. et al. Guidelines for cell-type heterogeneity quantification based on a comparative analysis of reference-free DNA methylation deconvolution software. BMC Bioinformatics. 2020;21, 16.</p>
 </div>
 
 
@@ -486,7 +571,7 @@ A more detailed description of each method is given below the table.</p>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -504,7 +589,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

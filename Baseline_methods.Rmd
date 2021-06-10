@@ -2,11 +2,26 @@
 title: "Description of the baseline methods"
 output:
   html_document:
+    toc: true
     includes:
       in_header: cover.html
 ---
 
-This table gives an overview of all the methods implemented as baseline is Deconbench, in particular their characteristics in terms of:  
+# General description
+
+The baseline methods we propose here are wrappers of already published unsupervised deconvolution algorithms  (ICA-based or NMF-based). We assume here that $A$, $T_{MET}$  and $T_{RNA}$  are unknown and need to be estimated, either independently (single-omic pipelines) or integratively (double-omic pipelines). 
+
+Before deconvolution, we systematically apply a pre-treatment step of dimensionality reduction based on feature selection. All baseline methods source code is downloadable on the DECONbench platform.
+
+
+All baselines relies on unsupervised deconvolution algorithms, which consists in solving D=TA, either by ICA-based (i) or NMF-based (ii) approaches. 
+
+- (i)  ICA-based approaches (r_WIC, m_WIC and b_WIC) consist of minimising mutual information of sources by defining independent components. It is based on the fixed-point FastICA algorithm developed by Aapo Hyvärinen [1,2]. 
+- (ii) NMF-based approaches (r_WNM, m_EDC, m_MDC, b_COM, b_MEA) aims to minimising $||D-TA||_{2}$.
+
+# Summary table
+
+This following table gives an overview of all the methods implemented as baseline is Deconbench, in particular their characteristics in terms of:  
 - omics data they work on   
 - the feature selection they use (FS)  
 - the deconvolution algorithm they are based on   
@@ -22,41 +37,94 @@ knitr::kable(t, align = 'c')
 `Time 1 A` is the time to run the method one time, `Time 10 A` is the time to run the method on all the benchmark datasets of DeconBench. 
 
 
-##Detail of each baseline method
+
+# Detail of each baseline method
 
 Eight methods have been included in the benchmark as baseline to be compared with the accuracy of new methods.
 
-* The method **RNA_wICA (r_WIC)** relies on transcriptomic data and uses Independent Component Analysis (ICA) for both feature selection and deconvolution. It relies on the use of the functions “runICA” and “getGenesICA” by P. Nazarov [(available here)](sablab.net/scripts/LibICA.r) and the deconica R package [(available here)](https://urszulaczerwinska.github.io/DeconICA/). For the ICA-based feature selection, the function “runICA” is run for the first time with the parameters ncomp = 10 and ntry = 50. Then, the function “getGenesICA” selects top-contributing genes with a FDR of 0.2, the feature selection is done on these contributing genes belonging to a component having an average stability greater than 0.8. Finally, duplicated genes are removed. 
-For the ICA-based deconvolution step, the function deconica::run_fastica is run with parameters overdecompose = FALSE and n.comp = 5, remaining parameters set to default. The 30 most important genes of each ICA components are extracted by the function deconica::generate_markers with the parameter return = "gene.ranked". These genes are used to weight the components score with the function deconica::get_scores, with the log counts of the ICA as “df” parameter, the list of 30 genes as “markers.list” parameter, and the parameter summary = "weighted.mean". Finally, the proportions are extracted with the function deconica::stacked_proportions_plot on the transpose. 
+## ICA-based methods
+
+### RNA_wICA (r_WIC, ICA-based deconvolution on RNA)
+
+The method RNA_wICA (r_WIC) uses transcriptomic data as input and is based on the ICA algorithm for both feature selection and deconvolution. It relies on the use of the functions “runICA” and “getGenesICA” developed by P. Nazarov (sablab.net/scripts/LibICA.r) and the deconica R package [3]. 
+
+* STEP1: feature selection. For the ICA-based feature selection, the function “runICA” is run at first with the parameters `$`ncomp = 10`$` and `ntry = 50`. Then, the function “getGenesICA” selects top-contributing genes with a FDR of 0.2, the feature selection is done on these contributing genes belonging to a component having an average stability greater than 0.8. Finally, duplicated genes are removed. 
+
+* STEP2: deconvolution. First, we perform FastICA unsupervised deconvolution (`deconica::run_fastica` is run with the parameters `overdecompose = FALSE` and `n.comp = 5`; remaining parameters are set to default). Second, we compute the abundance of the identified cell type following deconica pipeline, assuming that the weighted-mean of the $30_{top}$ genes of a component is a unique proxy of each component signal.The 30 most important genes of each ICA component are extracted by the function deconica::generate_markers with the parameter `return = "gene.ranked`". These genes are used to weight the component scores with the function `deconica::get_scores`, with the log counts of the ICA as “df” parameter, the list of 30 genes as “markers.list” parameter, and the parameter `summary = "weighted.mean"`. Finally, the proportions are extracted with the function `deconica::stacked_proportions_plot` on the transpose of the `deconica::get_scores` output. 
+
+### DNAm_wICA (r_WIC, ICA-based deconvolution on RNA)
+
+The method DNAm_wICA (m_WIC) uses DNA methylation data as input. 
+
+* STEP1: feature selection. It has no feature selection step. 
+
+* STEP2: deconvolution. The deconvolution step is based on ICA, similarly to what was described for the second step of RNA_wICA, but applied on the DNA methylation matrix.
+
+### both_wICA (b_WIC. ICA-based deconvolution on RNAD and DNAm)
+
+The method both_wICA (b_WIC) combines transcriptomics and DNA methylation information. 
+
+* STEP1: feature selection. It has no feature selection step. 
+
+* STEP2: deconvolution. The deconvolution is in two steps, one on each data type. The transcriptomics and DNA methylation are separately deconvoluted with the same deconvolution step as in r_WIC and m_WIC respectively to estimate  AMET and ARNA 
+
+* STEP3: integration. Finally, the mean of both  AMET and ARNA estimated proportion matrices is computed as the final method output. To compute the average, the cell types of the both deconvolution matrices are matched by iteration. The cell types of the methylation result matrix are reordered 1,000 times, and the one that best correlates with the transcriptomic result matrix is kept. 
+
+## NMF-based methods
+
+### RNA_wNMF (r_WNM,  NMF-based deconvolution on RNA)
+
+The method RNA_wNMF (r_WNM), is a two step-approach that uses transcriptomic data as input. 
+
+* STEP1: feature selection. The first step uses ICA to perform a feature selection as described for RNA_wICA, although duplicated genes are kept. This step therefore allows genes that contribute to several components to be present several times in the data. 
+
+* STEP2: deconvolution. The deconvolution is based on sparse NMF and least-squares optimization to minimise $||D-TA||_{2}$ [4]. It is called by the `NMF::nmf` function, with the parameter `method = "snmf/r"`.
+
+### DNAm_EDec (m_EDC, NMF-based deconvolution on DNAm)
+
+* STEP1: feature selection. The method DNAm_EDec (m_EDC), uses DNA methylation data as input and follows the pipeline implemented in the R package medepir7. The feature selection is performed by `medepir::feature_selection` [7] for keeping highly variable probes (5000 most variable probes). 
+
+* STEP2: deconvolution. The NMF-based algorithm of the method EDec9 is used for the deconvolution part, with the function `medepir::Edec` [5] and all the selected probes as “infloci” parameter. The algorithm consist in minimizing the error term $||D-TA||_{2}$ with constraints on methylation values.
+
+### DNAm_MeDeCom (m_MDC,  NMF-based deconvolution on DNAm)
+
+* STEP1: feature selection. The method DNAm_MeDeCom (m_MDC), uses DNA methylation data as input and is based on the pipeline of the R package `medepir` [7]. The feature selection is performed as for DNAm_EDec above to select the 5000 most variable probes. 
+
+* STEP2: deconvolution. The deconvolution step, however, uses the MeDeCom R package8. It is run with the function `MeDeCom::runMeDeCom` [6], with the lambda parameter set to 0.01. As EDec implementation of NMF algorithm, MeDeCom algorithm consists in minimizing the error term $||D-TA||_{2}$ with constraints on methylation values.
+
+### both_wNMFMeDeCom (b_COM, NMF-based deconvolution on RNA and DNAm)
+
+The method both_wNMFMeDeCom (b_COM) combines transcriptomics and DNA methylation information. It is the combination of the two methods RNA_wNMF and DNAm_MeDeCom. The method r_WNM is first applied on the RNAseq matrix. 
+
+* STEP1: feature selection. The DNA methylation matrix is pre-treated as described in the m_MDC method, with the selection of 5000 most variable. 
+
+* STEP2-3: deconvolution-integration. Finally, the MeDeCom algorithm is run on the DNAm data, with the result of r_WNM as the initialization parameter startA.
+ 
+### both_meanwNMFMeDeCom (b_MEA, NMF-based deconvolution on RNA and DNAm)
+
+The method both_meanwNMFMeDeCom (b_MEA), which integrates transcriptomics and DNA methylation, applies r_WNM to the transcriptomics matrix, m_MDC to the DNA methylation matrix.
+
+* STEP1: feature selection. Feature selection is performed on DMET and DRNA matrices as described in r_WNM and m_MDC sections. 
+
+* STEP2: deconvolution.  Deconvolution is performed on DMET and DRNA matrices as described in r_WNM and m_MDC sections to estimate  AMET and ARNA matrices.
+
+* STEP3: integration. We computed the mean of the two estimated AMET and ARNA matrices, similarly to b_WIC.
 
 
-* The method **RNA_wNMF (r_WNM)**, using transcriptomic data, is in two steps. The first step uses ICA to perform a feature selection as described for RNA_wICA, although duplicated genes are kept. This step, therefore, allows a gene which contributes to several components to be present several times in the data. The deconvolution is based on Non-negative Matrix Factorization (NMF) called by the NMF::nmf function [(package available here)](https://CRAN.R-project.org/package=NMF), with the parameter method = "snmf/r". 
+# References
 
+[1] fastICA: FastICA Algorithms to Perform ICA and Projection Pursuit. https://CRAN.R-project.org/package=fastICA.
 
-* The method **DNAm_wICA (m_WIC)** analyzes DNA methylation data. It does not provide feature selection. The deconvolution step is based on ICA, similarly to what was described for the second step of RNA_wICA, but applied on the DNA methylation matrix.
+[2] Hyvarinen, A. Fast and robust fixed-point algorithms for independent component analysis. IEEE Trans. Neural Netw. 10, 626–634 (1999).
 
+[3] Czerwinska, U. UrszulaCzerwinska/DeconICA: DeconICA first release. (Zenodo, 2018). doi:10.5281/zenodo.1250070.
 
-* The method **DNAm_EDec (m_EDC)**, which estimates sample composition from DNA methylation data, follows the pipeline implemented in the R package medepir [1]. The feature selection is made with medepir::feature_selection to keep the probes with a variance higher than 0.02. The method EDec [2] is used for the deconvolution part, with the function medepir::Edec and all the selected probes as “infloci” parameter. 
+[4] Frichot, E., Mathieu, F., Trouillon, T., Bouchard, G. & François, O. Fast and Efficient Estimation of Individual Ancestry Coefficients. Genetics 196, 973–983 (2014).
 
+[5] Onuchic, V. et al. Epigenomic Deconvolution of Breast Tumors Reveals Metabolic Coupling between Constituent Cell Types. Cell Rep. 17, 2075–2086 (2016).
 
-* The method **DNAm_MeDeCom (m_MDC)**, also using DNA methylation, is similarly based on the pipeline of the R package medepir. The feature selection is made as for DNAm_EDec above, on the probes with a variance higher than 0.02. The deconvolution step, however, is from the MeDeCom R package [3]. It is run with the function MeDeCom::runMeDeCom, with the lambda parameter set to 0.01.
+[6] Lutsik, P. et al. MeDeCom: discovery and quantification of latent components of heterogeneous methylomes. Genome Biol. 18, 1–20 (2017).
 
+[7] Decamps, C., Privé, F., Bacher, R. et al. Guidelines for cell-type heterogeneity quantification based on a comparative analysis of reference-free DNA methylation deconvolution software. BMC Bioinformatics. 2020;21, 16. 
 
-* The method **both_wICA (b_WIC)** combines the input of both transcriptomics and DNA methylation. It has no feature selection step. The deconvolution is in two steps, one on each data type. The transcriptomics and DNA methylation are separately deconvoluted with the same deconvolution step as in r_WIC and m_WIC respectively. Finally, the mean of both deconvolution matrices is computed as the final method output. To compute the average, the cell types of the both deconvolution matrices are matched by iteration. The cell types of the methylation result matrix are reordered 1,000 times, and the one that best correlates with the transcriptomic result matrix is kept. 
-
-
-* The method **both_wNMFMeDeCom (b_COM)**, also combining transcriptomics and DNA methylation, is the combination of the two methods RNA_wNMF and DNAm_MeDeCom. The method r_WNM is first applied on the RNAseq matrix. The DNA methylation matrix is pre-treated as described in the m_MDC method, with the selection of probes with a variance higher than 0.02. Finally, the method MeDeCom is run on the DNAm data, with the result of r_WNM as initialization parameter startA. 
-
-
-* The method **both_meanwNMFMeDeCom (b_MEA)**, which integrates transcriptomics and DNA methylation, applies r_WNM to the transcriptomics matrix, m_MDC to the DNA methylation matrix, and returns the mean of the two results matrices, similarly to what we explained for b_WIC.
-
-
-
-
-[1] Decamps, C., Privé, F., Bacher, R. et al. Guidelines for cell-type heterogeneity quantification based on a comparative analysis of reference-free DNA methylation deconvolution software. BMC Bioinformatics. 2020;21, 16. 
-
-
-[2] Onuchic V, Hartmaier RJ, Boone DN, Samuels ML, Patel RY, White WM, et al. Epigenomic Deconvolution of breast tumors reveals metabolic coupling between constituent cell types. Cell Rep. 2016;17:2075–86.
-
-[3] Lutsik P, Slawski M, Gasparoni G, Vedeneev N, Hein M, Walter J. MeDeCom: discovery and quantification of latent components of heterogeneous methylomes. Genome Biol. BioMed Central. 2017;18:55.
 
